@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -38,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.runOnUiThread(new Runnable() {
             //Eventbus handlers need to return quickly, so show the toast asynchronously
             public void run() {
-                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-
+                Utilities.showToast(getApplicationContext(), msg);
             }
         });
 
