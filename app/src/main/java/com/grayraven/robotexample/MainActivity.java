@@ -40,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 Utilities.showToast(getApplicationContext(), msg);
             }
         });
-
-
-
-
     }
 
 

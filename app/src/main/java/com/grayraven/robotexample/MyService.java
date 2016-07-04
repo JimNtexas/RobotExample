@@ -27,7 +27,7 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         Log.i(TAG, "Service onStartCommand");
-
+        isRunning = true;
         //Creating new thread for my service
         //Always write your long running tasks in a separate thread, to avoid ANR
         new Thread(new Runnable() {
@@ -36,13 +36,13 @@ public class MyService extends Service {
                 int cnt = 0;
                 if(isRunning){
                     Log.i(TAG, "Service running");
-                }
+                } 
 
                 //NOTE: See this SO post about the traditional ways to send a message from a service to an activity:
                 //http://stackoverflow.com/questions/12997463/send-intent-from-service-to-activity
                 //I think using an event bus is less trouble.
 
-                while(true) {
+                while(isRunning) {
                     try {
                         Thread.sleep(5000);
                         //send toast message to main activity
@@ -54,6 +54,7 @@ public class MyService extends Service {
                         e.printStackTrace();
                     }
                 }
+                Log.d(TAG, "timer loop exiting");
             }
         }).start();
 
@@ -64,5 +65,6 @@ public class MyService extends Service {
     public void onDestroy() {
         isRunning = false;
         Log.i(TAG, "Service onDestroy");
+        super.onDestroy();
     }
 }
